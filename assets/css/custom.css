@@ -1,0 +1,962 @@
+/* ==========================
+   FIXIT - COULEURS PERSONNALISÉES COMPLÈTES
+   Vert tendre + Lilas - TOUT DU SCSS + AMÉLIORATIONS
+   ========================== */
+
+/*
+ * ------------------------------------------------------------------------------
+ * Performances : optimisation du rendu des polices
+ *
+ * PageSpeed signale que les webfonts de Font Awesome retardent le First
+ * Contentful Paint (FCP) car elles utilisent la valeur par défaut
+ * `font-display: block`, qui masque le texte jusqu’à ce que les polices soient
+ * entièrement chargées. Pour éviter ce comportement et améliorer le temps de
+ * rendu initial, nous redéclarons ici les règles @font-face en spécifiant
+ * `font-display: swap`. Cette directive demande au navigateur d’utiliser
+ * immédiatement une police de secours, puis de l’échanger par la police
+ * Font Awesome dès qu’elle est disponible.  Comme ces déclarations
+ * apparaissent après les feuilles de style de Font Awesome, elles prennent le
+ * pas sur les réglages intégrés et n’entraînent aucun changement visuel.
+ */
+
+@font-face {
+  font-family: "Font Awesome 6 Brands";
+  font-style: normal;
+  font-weight: 400;
+  /* chemin absolu : adapté au dossier /css → ../lib/fontawesome-free/webfonts */
+  src: url("../lib/fontawesome-free/webfonts/fa-brands-400.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../lib/fontawesome-free/webfonts/fa-regular-400.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 900;
+  src: url("../lib/fontawesome-free/webfonts/fa-solid-900.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Font Awesome 5 Free";
+  font-style: normal;
+  font-weight: 900;
+  src: url("../lib/fontawesome-free/webfonts/fa-solid-900.woff2") format("woff2");
+  font-display: swap;
+}
+
+
+:root {
+  /* === COULEURS PRINCIPALES === */
+  --primary-color: #3fa17e;           /* Vert principal (plus profond) */
+  --secondary-color: #b19cd9;         /* Lilas principal */
+  --accent-color: #27ae60;            /* Vert accent (plus saturé, plus foncé) */
+  --accent-lilac: #8e44ad;            /* Lilas accent */
+  
+  /* === COULEURS NEUTRES === */
+  --text-color: #27362d;              /* Texte principal (plus contrasté) */
+  --text-light: #516957;              /* Texte secondaire */
+  --text-muted: #7f9082;              /* Texte discret */
+  
+  --bg-light: #f8fcfa;                /* Fond clair */
+  --border-color: #d8ede0;            /* Bordures */
+  
+  /* === ARRIÈRE-PLANS SUPPLÉMENTAIRES === */
+  --bg-main: #f4f5f6;                 /* Fond principal gris très doux */
+  --bg-card: #ffffff;                 /* Cartes blanc pur */
+  --bg-hover: #f7faf8;                /* Fond au survol */
+  --bg-accent: #eff1f3;               /* Fond accentué gris */
+  
+  /* === BORDURES SUPPLÉMENTAIRES === */
+  --border-light: #e5ebe7;            /* Bordures très légères */
+  
+  /* === EFFETS NÉON === */
+  --neon-green: 0 0 20px rgba(63, 161, 126, 0.35);
+  --neon-lilac: 0 0 20px rgba(177, 156, 217, 0.35);
+  --neon-mixed: 0 0 25px rgba(63, 161, 126, 0.25), 
+                0 0 40px rgba(177, 156, 217, 0.20);
+  --neon-green-subtle: 0 0 10px rgba(63, 161, 126, 0.5);
+  --neon-lilac-subtle: 0 0 10px rgba(177, 156, 217, 0.5);
+  
+  /* === OMBRES === */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.1);
+  --shadow-colored: 0 4px 20px rgba(63, 161, 126, 0.15), 
+                    0 4px 20px rgba(177, 156, 217, 0.15);
+}
+
+
+[data-theme="dark"] {
+  --text-color: #e6f5ec;
+  --text-light: #b8d8c2;
+  --text-muted: #8fa692;
+  --bg-light: #1d2a23;
+  --border-color: #294037;
+  
+  --bg-main: #1a1d21;
+  --bg-card: #1e2126;
+  --bg-hover: #23262b;
+  --bg-accent: #252830;
+  --border-light: #2d3540;
+  
+  --neon-green: 0 0 20px rgba(63, 161, 126, 0.6);
+  --neon-lilac: 0 0 20px rgba(177, 156, 217, 0.6);
+  --neon-mixed: 0 0 25px rgba(63, 161, 126, 0.45),
+                0 0 35px rgba(177, 156, 217, 0.35);
+  
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* ==========================
+   BASE & RÉINITIALISATION
+   ========================== */
+
+* {
+  transition: color 0.3s ease, 
+              background-color 0.3s ease, 
+              border-color 0.3s ease,
+              box-shadow 0.3s ease,
+              transform 0.3s ease;
+}
+
+body {
+  background: var(--bg-main) !important;
+  color: var(--text-color) !important;
+  line-height: 1.6;
+}
+
+.container, .wrapper, .content, main, article, .main-content {
+  background: var(--bg-card) !important;
+  box-shadow: var(--shadow-sm) !important;
+  border-radius: 8px !important;
+}
+
+/* ==========================
+   COULEURS HEADER - MAXIMUM SPÉCIFICITÉ
+   ========================== */
+
+.header-wrapper,
+header,
+.header,
+nav,
+.nav,
+.navbar {
+  border-bottom-color: var(--border-color) !important;
+  background: var(--bg-card) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.header-title,
+.site-title,
+.header .title,
+.navbar-brand,
+h1.site-title,
+.site-name {
+  color: var(--primary-color) !important;
+}
+
+.menu a,
+.nav a,
+.navbar-nav a,
+.navigation a,
+nav a,
+.main-menu a,
+.menu li a,
+.nav li a {
+  color: var(--text-light) !important;
+}
+
+.menu a:hover,
+.nav a:hover,
+.navbar-nav a:hover,
+.navigation a:hover,
+nav a:hover,
+.main-menu a:hover,
+.menu li a:hover,
+.nav li a:hover {
+  color: var(--primary-color) !important;
+  background-color: rgba(107, 197, 168, 0.1) !important;
+}
+
+.menu a.active,
+.nav a.active,
+.navbar-nav a.active,
+.navigation a.active,
+nav a.active,
+.main-menu a.active,
+.menu li a.active,
+.nav li a.active,
+.menu .active a,
+.nav .active a,
+.current-menu-item a {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+  color: white !important;
+}
+
+/* ==========================
+   COULEURS TYPOGRAPHIE - MAXIMUM SPÉCIFICITÉ
+   ========================== */
+
+h1,
+.h1,
+article h1,
+.content h1,
+.post h1,
+.page h1,
+body h1 {
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-lilac)) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+h2,
+.h2,
+article h2,
+.content h2,
+.post h2,
+.page h2,
+body h2 {
+  color: var(--text-color) !important;
+}
+
+h2::before,
+.h2::before,
+article h2::before,
+.content h2::before,
+.post h2::before,
+.page h2::before,
+body h2::before {
+  background: linear-gradient(180deg, var(--accent-color), var(--accent-lilac)) !important;
+}
+
+h3,
+.h3,
+article h3,
+.content h3,
+.post h3,
+.page h3,
+body h3 {
+  color: var(--primary-color) !important;
+}
+
+h4,
+.h4,
+article h4,
+.content h4,
+.post h4,
+.page h4,
+body h4 {
+  color: var(--accent-lilac) !important;
+}
+
+a,
+.link,
+article a,
+.content a,
+.post a,
+.page a,
+body a {
+  color: var(--accent-color) !important;
+}
+
+a:hover,
+.link:hover,
+article a:hover,
+.content a:hover,
+.post a:hover,
+.page a:hover,
+body a:hover {
+  color: var(--accent-lilac) !important;
+}
+
+/* ==========================
+   COULEURS POSTS & CONTENUS - MAXIMUM SPÉCIFICITÉ
+   ========================== */
+
+.summary-title a,
+.entry-title a,
+.post-title a,
+.article-title a,
+.content-title a,
+.post .title a,
+.article .title a,
+.summary .title a {
+  color: var(--text-color) !important;
+}
+
+.summary-title a:hover,
+.entry-title a:hover,
+.post-title a:hover,
+.article-title a:hover,
+.content-title a:hover,
+.post .title a:hover,
+.article .title a:hover,
+.summary .title a:hover {
+  color: var(--accent-color) !important;
+}
+
+.post-meta,
+.entry-meta,
+.meta,
+.article-meta,
+.content-meta,
+.post .meta,
+.article .meta,
+.summary .meta {
+  color: var(--text-muted) !important;
+}
+
+.read-more,
+.more-link,
+.continue-reading,
+.post .read-more,
+.article .read-more,
+.summary .read-more {
+  background: linear-gradient(135deg, var(--accent-color), var(--primary-color)) !important;
+  color: white !important;
+}
+
+.read-more:hover,
+.more-link:hover,
+.continue-reading:hover,
+.post .read-more:hover,
+.article .read-more:hover,
+.summary .read-more:hover {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-lilac)) !important;
+  color: white !important;
+}
+
+/* ==========================
+   COULEURS TAGS & ÉLÉMENTS - MAXIMUM SPÉCIFICITÉ
+   ========================== */
+
+.tag,
+.category,
+.label,
+.badge,
+.chip,
+.post-tag,
+.article-tag,
+.post .tag,
+.article .tag,
+.tags .tag,
+.categories .category,
+.taxonomy-term {
+  background: linear-gradient(135deg, rgba(107, 197, 168, 0.2), rgba(177, 156, 217, 0.2)) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.tag:hover,
+.category:hover,
+.label:hover,
+.badge:hover,
+.chip:hover,
+.post-tag:hover,
+.article-tag:hover,
+.post .tag:hover,
+.article .tag:hover,
+.tags .tag:hover,
+.categories .category:hover,
+.taxonomy-term:hover {
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-lilac)) !important;
+  color: white !important;
+}
+
+/* ==========================
+   COULEURS PAGINATION - MAXIMUM SPÉCIFICITÉ
+   ========================== */
+
+.pagination a,
+.page-numbers,
+.pager a,
+.paginator a,
+.pagination .page-link,
+.page-navigation a {
+  color: var(--text-light) !important;
+  border-color: var(--border-color) !important;
+}
+
+.pagination a:hover,
+.page-numbers:hover,
+.pager a:hover,
+.paginator a:hover,
+.pagination .page-link:hover,
+.page-navigation a:hover {
+  background: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+  color: white !important;
+}
+
+.pagination .current,
+.page-numbers.current,
+.pager .current,
+.paginator .current,
+.pagination .active,
+.page-navigation .current {
+  background: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+  color: white !important;
+}
+
+/* ==========================
+   COULEURS BOUTONS - MAXIMUM SPÉCIFICITÉ
+   ========================== */
+
+.btn,
+button,
+.button,
+input[type="submit"],
+input[type="button"],
+.submit-btn,
+.form-submit {
+  background: linear-gradient(135deg, var(--accent-color), var(--primary-color)) !important;
+  color: white !important;
+}
+
+.btn:hover,
+button:hover,
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.submit-btn:hover,
+.form-submit:hover {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-lilac)) !important;
+  color: white !important;
+}
+
+.btn-secondary,
+.button-secondary,
+.secondary-btn {
+  background: transparent !important;
+  color: var(--accent-color) !important;
+  border-color: var(--accent-color) !important;
+}
+
+.btn-secondary:hover,
+.button-secondary:hover,
+.secondary-btn:hover {
+  background: var(--accent-color) !important;
+  color: white !important;
+}
+
+/* ==========================
+   COULEURS FORMULAIRES - MAXIMUM SPÉCIFICITÉ
+   ========================== */
+
+input,
+textarea,
+select,
+.form-control,
+.input,
+.form-input {
+  border-color: var(--border-color) !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+.form-control:focus,
+.input:focus,
+.form-input:focus {
+  border-color: var(--accent-color) !important;
+  box-shadow: 0 0 0 2px rgba(107, 197, 168, 0.2) !important;
+}
+
+/* ==========================
+   COULEURS ÉLÉMENTS SPÉCIAUX - MAXIMUM SPÉCIFICITÉ
+   ========================== */
+
+blockquote,
+.blockquote,
+.quote {
+  border-left-color: var(--accent-color) !important;
+  background: rgba(107, 197, 168, 0.05) !important;
+}
+
+blockquote::before,
+.blockquote::before,
+.quote::before {
+  color: var(--accent-color) !important;
+}
+
+code,
+.code,
+.inline-code {
+  background: var(--bg-light) !important;
+  border-color: var(--border-color) !important;
+}
+
+pre,
+.code-block,
+.highlight {
+  background: var(--bg-light) !important;
+  border-color: var(--border-color) !important;
+}
+
+table th,
+.table th,
+.data-table th {
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-lilac)) !important;
+  color: white !important;
+}
+
+table td,
+.table td,
+.data-table td {
+  border-bottom-color: var(--border-color) !important;
+}
+
+table tr:hover td,
+.table tr:hover td,
+.data-table tr:hover td {
+  background: rgba(107, 197, 168, 0.05) !important;
+}
+
+/* ==========================
+   COULEURS TOC & NAVIGATION - MAXIMUM SPÉCIFICITÉ
+   ========================== */
+
+.toc,
+#toc,
+.table-of-contents,
+.content-toc {
+  background: var(--bg-light) !important;
+  border-color: var(--border-color) !important;
+}
+
+.toc-title,
+#toc-title,
+.table-of-contents-title,
+.content-toc-title {
+  color: var(--text-color) !important;
+  border-bottom-color: var(--accent-color) !important;
+}
+
+.toc a,
+#toc a,
+.table-of-contents a,
+.content-toc a {
+  color: var(--text-light) !important;
+}
+
+.toc a:hover,
+#toc a:hover,
+.table-of-contents a:hover,
+.content-toc a:hover {
+  color: var(--accent-color) !important;
+}
+
+.breadcrumb a,
+.breadcrumbs a,
+.navigation-breadcrumb a {
+  color: var(--accent-color) !important;
+}
+
+.breadcrumb a:hover,
+.breadcrumbs a:hover,
+.navigation-breadcrumb a:hover {
+  color: var(--accent-lilac) !important;
+}
+
+/* ==========================
+   COULEURS FOOTER - MAXIMUM SPÉCIFICITÉ
+   ========================== */
+
+.footer,
+footer,
+.site-footer,
+.page-footer {
+  background: var(--bg-light) !important;
+  border-top-color: var(--border-color) !important;
+  color: var(--text-light) !important;
+}
+
+.footer a,
+footer a,
+.site-footer a,
+.page-footer a {
+  color: var(--text-muted) !important;
+}
+
+.footer a:hover,
+footer a:hover,
+.site-footer a:hover,
+.page-footer a:hover {
+  color: var(--accent-color) !important;
+}
+
+/* ==========================
+   COULEURS SOCIAL & PARTAGE - MAXIMUM SPÉCIFICITÉ
+   ========================== */
+
+.social-share a,
+.social-links a,
+.share-buttons a,
+.social-icons a {
+  background: var(--bg-light) !important;
+  color: var(--text-light) !important;
+  border-color: var(--border-color) !important;
+}
+
+.social-share a:hover,
+.social-links a:hover,
+.share-buttons a:hover,
+.social-icons a:hover {
+  background: var(--accent-color) !important;
+  color: white !important;
+}
+
+/* ==========================
+   COULEURS SEARCH - MAXIMUM SPÉCIFICITÉ
+   ========================== */
+
+.search-input,
+input[type="search"],
+.search-field,
+.search-box {
+  background: var(--bg-light) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-color) !important;
+}
+
+.search-input:focus,
+input[type="search"]:focus,
+.search-field:focus,
+.search-box:focus {
+  border-color: var(--accent-color) !important;
+  box-shadow: 0 0 0 2px rgba(107, 197, 168, 0.2) !important;
+}
+
+/* ==========================
+   COULEURS WIDGETS - MAXIMUM SPÉCIFICITÉ
+   ========================== */
+
+.widget,
+.sidebar-widget,
+.widget-area,
+.sidebar-box {
+  background: var(--bg-light) !important;
+  border-color: var(--border-color) !important;
+}
+
+.widget-title,
+.widget h3,
+.sidebar-widget-title,
+.widget-area-title {
+  color: var(--text-color) !important;
+  border-bottom-color: var(--accent-color) !important;
+}
+
+.widget a,
+.sidebar-widget a,
+.widget-area a,
+.sidebar-box a {
+  color: var(--text-light) !important;
+}
+
+.widget a:hover,
+.sidebar-widget a:hover,
+.widget-area a:hover,
+.sidebar-box a:hover {
+  color: var(--accent-color) !important;
+}
+
+/* ==========================
+   COULEURS LISTES - MAXIMUM SPÉCIFICITÉ
+   ========================== */
+
+ul li::marker,
+.list li::marker,
+.content ul li::marker,
+.post ul li::marker,
+article ul li::marker {
+  color: var(--accent-color) !important;
+}
+
+ol li::marker,
+.ordered-list li::marker,
+.content ol li::marker,
+.post ol li::marker,
+article ol li::marker {
+  color: var(--accent-lilac) !important;
+}
+
+/* ==========================
+   AMÉLIORATIONS CSS SUPPLÉMENTAIRES
+   ========================== */
+
+/* === POSTS & ARTICLES === */
+.post, .card, .article, .entry {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-light) !important;
+  border-radius: 12px !important;
+  padding: 24px !important;
+  margin-bottom: 24px !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.post:hover, .card:hover, .article:hover {
+  box-shadow: var(--shadow-colored) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* === FORMULAIRES SUPPLÉMENTAIRES === */
+input, textarea, select {
+  background: var(--bg-light) !important;
+  border: 2px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  padding: 10px 14px !important;
+  color: var(--text-color) !important;
+}
+
+/* === SECTIONS & PAGES === */
+section, .section {
+  background: var(--bg-card) !important;
+  padding: 30px !important;
+  margin: 20px 0 !important;
+  border-radius: 8px !important;
+}
+
+.page-content, .site-content {
+  background: var(--bg-main) !important;
+}
+
+.sidebar {
+  background: var(--bg-light) !important;
+  padding: 20px !important;
+  border-radius: 8px !important;
+}
+
+/* === TABLEAUX COMPLETS === */
+table {
+  background: var(--bg-card) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: var(--shadow-sm) !important;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table td {
+  background: var(--bg-card) !important;
+  padding: 12px !important;
+}
+
+table tr:last-child td {
+  border-bottom: none !important;
+}
+
+/* === BREADCRUMB COMPLET === */
+.breadcrumb {
+  background: var(--bg-light) !important;
+  padding: 10px 15px !important;
+  border-radius: 6px !important;
+  margin-bottom: 20px;
+}
+
+.breadcrumb .separator {
+  color: var(--text-muted) !important;
+  margin: 0 8px;
+}
+
+/* === CODE COMPLET === */
+pre code {
+  background: transparent !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+code {
+  color: var(--accent-color) !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  font-size: 0.9em !important;
+  font-family: 'Courier New', monospace;
+}
+
+pre {
+  border-radius: 8px !important;
+  padding: 16px !important;
+  overflow-x: auto !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+/* === BLOCKQUOTE COMPLET === */
+blockquote {
+  padding: 20px !important;
+  border-radius: 8px !important;
+  box-shadow: var(--shadow-sm) !important;
+  margin: 20px 0;
+  font-style: italic;
+}
+
+/* === ALERTES & NOTIFICATIONS === */
+.alert, .notice, .message {
+  padding: 15px 20px !important;
+  border-radius: 8px !important;
+  margin: 20px 0;
+  border-left: 4px solid;
+}
+
+.alert-success, .notice-success {
+  background: rgba(107, 197, 168, 0.1) !important;
+  border-left-color: var(--accent-color) !important;
+  color: var(--text-color) !important;
+}
+
+.alert-info, .notice-info {
+  background: rgba(177, 156, 217, 0.1) !important;
+  border-left-color: var(--secondary-color) !important;
+  color: var(--text-color) !important;
+}
+
+.alert-warning, .notice-warning {
+  background: rgba(241, 196, 15, 0.1) !important;
+  border-left-color: #f1c40f !important;
+  color: var(--text-color) !important;
+}
+
+.alert-error, .notice-error {
+  background: rgba(231, 76, 60, 0.1) !important;
+  border-left-color: #e74c3c !important;
+  color: var(--text-color) !important;
+}
+
+/* === LISTES COMPLÈTES === */
+ul, ol {
+  padding-left: 25px;
+  line-height: 1.8;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+/* === SCROLLBAR PERSONNALISÉE === */
+::-webkit-scrollbar {
+  width: 12px !important;
+  height: 12px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-light) !important;
+  border-radius: 6px !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+  border-radius: 6px !important;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-lilac)) !important;
+}
+
+/* === ANIMATIONS === */
+@keyframes soft-glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(107, 197, 168, 0.3); 
+  }
+  50% { 
+    box-shadow: 0 0 30px rgba(177, 156, 217, 0.4); 
+  }
+}
+
+@keyframes pulse {
+  0% { 
+    transform: scale(1); 
+  }
+  50% { 
+    transform: scale(1.05); 
+  }
+  100% { 
+    transform: scale(1); 
+  }
+}
+
+.glow-effect {
+  animation: soft-glow 3s ease-in-out infinite;
+}
+
+.pulse-effect {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* === UTILITAIRES === */
+.text-center { text-align: center !important; }
+.text-left { text-align: left !important; }
+.text-right { text-align: right !important; }
+.text-justify { text-align: justify !important; }
+
+.mt-1 { margin-top: 10px !important; }
+.mt-2 { margin-top: 20px !important; }
+.mt-3 { margin-top: 30px !important; }
+.mb-1 { margin-bottom: 10px !important; }
+.mb-2 { margin-bottom: 20px !important; }
+.mb-3 { margin-bottom: 30px !important; }
+
+.p-1 { padding: 10px !important; }
+.p-2 { padding: 20px !important; }
+.p-3 { padding: 30px !important; }
+
+.rounded { border-radius: 8px !important; }
+.rounded-lg { border-radius: 12px !important; }
+.rounded-full { border-radius: 50% !important; }
+
+.shadow-sm { box-shadow: var(--shadow-sm) !important; }
+.shadow-md { box-shadow: var(--shadow-md) !important; }
+.shadow-lg { box-shadow: var(--shadow-lg) !important; }
+
+/* === MEDIA QUERIES === */
+@media (max-width: 768px) {
+  h1 { font-size: 2em; }
+  h2 { font-size: 1.5em; }
+  h3 { font-size: 1.25em; }
+  
+  .container, .wrapper, .content {
+    padding: 15px !important;
+    border-radius: 0 !important;
+  }
+  
+  .post, .card, .article {
+    padding: 15px !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* === PRINT STYLES === */
+@media print {
+  * {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  a, a:visited {
+    text-decoration: underline !important;
+  }
+  
+  .no-print, .header, .footer, .sidebar, .menu, nav {
+    display: none !important;
+  }
+}
