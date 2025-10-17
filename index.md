@@ -1,27 +1,27 @@
 ---
 layout: home
-title: DOCTech
+title: 1test1
 permalink: /
-description: "Le petit imprécis de pseudoscience sociale"
+description: "Encore un imprécis de pseudoscience (sociale)"
 
 ---
 
 
 
-# DOCTech
+# 1test1
 
 **Document d'Ordre Citoyen, et Technique**
 
-## Petit imprécis de pseudoscience (sociale)
+## Petit imprécis de pseudoscience (sociale) : le RETOUR +/- prêt
 
 
-Bienvenue sur **DOCTech**, espace de diffusion de notes et de résultats de recherches assistées par intelligence artificielle.
+Bienvenue sur **1test1**, espace de diffusion de notes et de résultats de recherches assistées par intelligence artificielle.
 
 Vous y trouverez des trucs en vrac, pas forcément mis à jour. Et relativement douteux comme d'hab.
 
 ---
 
-![Logo DOCTech](/assets/images/logo.jpg){: style="display:block; margin: 0 auto 1.5rem; max-width:200px; height:auto; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); border-radius: 10px;" }
+![Logo DOCTech](/assets/images/logo.png){: style="display:block; margin: 0 auto 1.5rem; max-width:200px; height:auto; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); border-radius: 10px;" }
 
 
 ---
@@ -39,7 +39,7 @@ Vous y trouverez des trucs en vrac, pas forcément mis à jour. Et relativement 
 
 ## À propos
 
-DOCTech est un projet visant à :
+1test1 est un projet visant à :
 1. Centraliser des recherches et pistes de réflexions
 2. Partager librement des ressources
 
