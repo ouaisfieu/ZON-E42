@@ -1,8 +1,10 @@
 baseurl: "/tech"
 url: "https://ouaisfieu.github.io"
 remote_theme: just-the-docs/just-the-docs
+baseurl: "/ZON-E42" # important pour GitHub Pages
 
-title: "DOCTech"
+
+title: "1test1 · ouaisfi.eu"
 description: "Petit imprécis de pseudoscience sociale"
 favicon_ico: "/favicon-96x96.png"
 
@@ -55,3 +57,11 @@ just_the_docs:
 
 back_to_top: true
 back_to_top_text: "↑ Haut de page"
+
+
+sass:
+  style: compressed
+
+
+
+
